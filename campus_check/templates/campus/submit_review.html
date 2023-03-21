@@ -1,0 +1,61 @@
+{% extends 'campus/base.html' %}
+
+{% block content %}
+  <h1>Submit a Review</h1>
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+{% comment %}     
+    <div class="star-rating">
+    <div class="star-rating__wrap">
+    <p> Value for money
+          <input class="star-rating__input" id="id_value_for_money_5" type="radio" name="value_for_money" value="5">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="id_value_for_money_5" title="5 out of 5 stars"></label>
+          <input class="star-rating__input" id="id_value_for_money_4" type="radio" name="value_for_money" value="4">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="id_value_for_money_4" title="4 out of 5 stars"></label>
+          <input class="star-rating__input" id="id_value_for_money_3" type="radio" name="value_for_money" value="3">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="id_value_for_money_3" title="3 out of 5 stars"></label>
+          <input class="star-rating__input" id="id_value_for_money_2" type="radio" name="value_for_money" value="2">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="id_value_for_money_2" title="2 out of 5 stars"></label>
+          <input class="star-rating__input" id="id_value_for_money_1" type="radio" name="value_for_money" value="1">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="id_value_for_money_1" title="1 out of 5 stars"></label>
+        </p>
+
+    <p> Teaching quality <input class="star-rating__input" id="id_teaching_quality_5" type="radio" name="teaching_quality" value="5">
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="id_teaching_quality_5" title="5 out of 5 stars"></label>
+    <input class="star-rating__input" id="id_teaching_quality_4" type="radio" name="teaching_quality" value="4">
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="id_teaching_quality_4" title="4 out of 5 stars"></label>
+    <input class="star-rating__input" id="id_teaching_quality_3" type="radio" name="teaching_quality" value="3">
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="id_teaching_quality_3" title="3 out of 5 stars"></label>
+    <input class="star-rating__input" id="id_teaching_quality_2" type="radio" name="teaching_quality" value="2">
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="id_teaching_quality_2" title="2 out of 5 stars"></label>
+    <input class="star-rating__input" id="id_teaching_quality_1" type="radio" name="teaching_quality" value="1">
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="id_teaching_quality_1" title="1 out of 5 stars"></label></p>
+
+    <p> Course content <input class="star-rating__input" id="id_course_content_5" type="radio" name="course_content" value="5">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_course_content_5" title="5 out of 5 stars"></label>
+<input class="star-rating__input" id="id_course_content_4" type="radio" name="course_content" value="4">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_course_content_4" title="4 out of 5 stars"></label>
+<input class="star-rating__input" id="id_course_content_3" type="radio" name="course_content" value="3">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_course_content_3" title="3 out of 5 stars"></label>
+<input class="star-rating__input" id="id_course_content_2" type="radio" name="course_content" value="2">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_course_content_2" title="2 out of 5 stars"></label>
+<input class="star-rating__input" id="id_course_content_1" type="radio" name="course_content" value="1">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_course_content_1" title="1 out of 5 stars"></label></p></p>
+    
+    <p> Job prospects <input class="star-rating__input" id="id_job_prospects_5" type="radio" name="job_prospects" value="5">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_job_prospects_5" title="5 out of 5 stars"></label>
+<input class="star-rating__input" id="id_job_prospects_4" type="radio" name="job_prospects" value="4">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_job_prospects_4" title="4 out of 5 stars"></label>
+<input class="star-rating__input" id="id_job_prospects_3" type="radio" name="job_prospects" value="3">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_job_prospects_3" title="3 out of 5 stars"></label>
+<input class="star-rating__input" id="id_job_prospects_2" type="radio" name="job_prospects" value="2">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_job_prospects_2" title="2 out of 5 stars"></label>
+<input class="star-rating__input" id="id_job_prospects_1" type="radio" name="job_prospects" value="1">
+<label class="star-rating__ico fa fa-star-o fa-lg" for="id_job_prospects_1" title="1 out of 5 stars"></label>
+</p> {% endcomment %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </div>
+  </form>
+{% endblock %}

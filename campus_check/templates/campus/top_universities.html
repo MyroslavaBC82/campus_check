@@ -1,0 +1,27 @@
+{% extends 'base.html' %} <!-- Xuanming Feng -->
+
+{% block content %}
+    <h2>Top Universities</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Average Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for university in universities %}
+            <tr>
+                <td><a href="{% url 'universities:university_detail' university.slug %}">{{ university.name }}</a></td>
+                <td>{{ university.location }}</td>
+                <td>{{ university.average_rating }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No universities found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

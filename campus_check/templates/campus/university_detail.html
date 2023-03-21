@@ -1,0 +1,44 @@
+{% extends 'campus/base.html' %}
+
+{% block content %}
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <img src="{{ university.logo.url }}" alt="{{ university.name }} logo" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            <h1>{{ university.name }}</h1>
+            <p>{{ university.description }}</p>
+            {% if university_rating %}
+                <p>Average Rating:
+                <span class="fa fa-star {% if university_rating > 0 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if university_rating > 1 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if university_rating > 2 %} checked {% endif %}"></span>
+                <span class="fa fa-star {% if university_rating > 3 %} checked {% endif %}" ></span>
+                <span class="fa fa-star {% if university_rating > 4 %} checked {% endif %}"></span> </p>
+            {% endif %}
+            <ul>
+                {% for degree in university.degree.all %}
+                    <li>{{ degree.name }}</li>
+                {% empty %}
+                    <p>No degrees available for this university.</p>
+                {% endfor %}
+            </ul>
+            <p>Website: <a href="{{ university.website }}">{{ university.website }}</a></p>
+            <p>Contact Email: <a href="mailto:{{ university.contact_email }}">{{ university.contact_email }}</a></p>
+        </div>
+    </div>
+    <h2>Courses</h2>
+    <ul>
+        {% for course in university.courses.all %}
+            <li>
+                <a href="{% url 'universities:course_detail' course.slug %}">{{ course.name }}</a>
+            </li>
+        {% empty %}
+            <p>No courses available for this university.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
+
