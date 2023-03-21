@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="star-rating">
+  <div class="star-rating__wrap">
+    {% for i in range %}
+    <input class="star-rating__input" id="{{ name }}_{{ i }}" type="radio" name="{{ name }}" value="{{ i }}" {% if i == value %}checked{% endif %}>
+    <label class="star-rating__ico fa fa-star-o fa-lg" for="{{ name }}_{{ i }}" title="{{ i }} out of {{ range }} stars"></label>
+    {% endfor %}
+  </div>
+</div>
+
+
