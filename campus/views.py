@@ -11,10 +11,31 @@ from django.db.models import Avg, Sum
 from django.http import JsonResponse
 from django.views.generic import ListView #XuanmingFeng
 
+def top_universities(request):  # Xuanming Feng
+    all_universities = University.objects.all()
+    university_ratings = {}
 
-def top_universities(request): #Xuanming Feng
-    universities = University.objects.order_by('-average_rating')[:5]
-    return render(request, 'campus_check/top_universities.html', {'universities': universities})
+    for university in all_universities:
+        course_ratings = []
+        courses = university.courses.all()
+
+        for course in courses:
+            reviews = course.review_set.all()
+            if reviews:
+                course_rating = (reviews.aggregate(Avg('value_for_money'))['value_for_money__avg'] +
+                                 reviews.aggregate(Avg('teaching_quality'))['teaching_quality__avg'] +
+                                 reviews.aggregate(Avg('course_content'))['course_content__avg'] +
+                                 reviews.aggregate(Avg('job_prospects'))['job_prospects__avg']) / 4
+                course_ratings.append(course_rating)
+
+        if course_ratings:
+            university_rating = sum(course_ratings) / len(course_ratings)
+            university_ratings[university] = university_rating
+
+    sorted_university_ratings = sorted(university_ratings.items(), key=lambda x: x[1], reverse=True)[:5]
+
+    context = {'universities': sorted_university_ratings}
+    return render(request, 'campus/top_universities.html', context)
 
 @login_required
 def student_profile(request):
@@ -221,6 +242,29 @@ def course_detail(request, course_name_slug):
 
 class TopUniversitiesView(ListView): #Xuanming Feng
     model = University
-    template_name = 'top_universities.html'
-    context_object_name = 'universities'
-    queryset = University.objects.order_by('-average_rating')[:5]
+    template_name = 'campus/top_universities.html'
+    context_object_name = 'top_universities'
+
+    def get_queryset(self):
+        universities = University.objects.all()
+        university_ratings = []
+
+        for university in universities:
+            course_ratings = []
+            courses = university.courses.all()
+
+            for course in courses:
+                reviews = course.review_set.all()
+                if reviews:
+                    course_rating = (reviews.aggregate(Avg('value_for_money'))['value_for_money__avg'] +
+                                     reviews.aggregate(Avg('teaching_quality'))['teaching_quality__avg'] +
+                                     reviews.aggregate(Avg('course_content'))['course_content__avg'] +
+                                     reviews.aggregate(Avg('job_prospects'))['job_prospects__avg']) / 4
+                    course_ratings.append(course_rating)
+
+            if course_ratings:
+                university_rating = sum(course_ratings) / len(course_ratings)
+                university_ratings.append((university, university_rating))
+
+        university_ratings.sort(key=lambda x: x[1], reverse=True)
+        return university_ratings[:5]

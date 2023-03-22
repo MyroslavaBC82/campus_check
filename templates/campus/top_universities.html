@@ -1,4 +1,4 @@
-{% extends 'base.html' %} <!-- Xuanming Feng -->
+{% extends 'campus/base.html' %} <!-- Xuanming Feng -->
 
 {% block content %}
     <h2>Top Universities</h2>
@@ -11,11 +11,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for university in universities %}
+            {% for top_university, rating in top_universities %}
             <tr>
-                <td><a href="{% url 'universities:university_detail' university.slug %}">{{ university.name }}</a></td>
-                <td>{{ university.location }}</td>
-                <td>{{ university.average_rating }}</td>
+                <td><a href="{% url 'universities:university_detail' top_university.slug %}">{{ top_university.name }}</a></td>
+                <td>{{ top_university.location }}</td>
+                <td>{{ rating|floatformat:1 }}</td>
             </tr>
             {% empty %}
             <tr>
